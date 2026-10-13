@@ -8,4 +8,4 @@
 
 已完成：中文README命名及目录导航、6份报告归入4组，图片保留assets；33条入口/报告相对链接通过。原311文件由78牌图、62测试文件、68文档、79源码、24配置/脚本组成，未为了数量删掉测试或代码。
 
-待账号步骤：当前没有可用GitHub CLI登录；浏览器打开github.com/new后显示GitHub登录页，已请用户自行登录。创建后必须核对Private状态、远端文件排除和实际地址。本次不把私有意图写成已创建的事实。
+2026-10-13完成远端验收：账号bowenx148-cmyk，私有仓库https://github.com/bowenx148-cmyk/tarot-divination-system。用户确认Git Credential Manager权限后完成设备授权，独立副本b4509e7推送main成功；网页显示Private、目录和中文README，首轮Actions已触发。314个跟踪文件、根目录20个文件；私有配置、用户运行记录、教学原图和原仓库历史不在该独立发布历史中。

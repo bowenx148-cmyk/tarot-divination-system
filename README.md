@@ -4,7 +4,7 @@
 
 ## 从哪里开始看
 
-首次运行看下方快速开始；了解架构和贡献看 [作品说明](docs/PORTFOLIO.md)；各类检查结果看 [报告导航](docs/reports/README.md)。计划使用私有GitHub仓库，地址标识为 `tarot-divination-system`，中文展示名为“塔罗占卜系统”；本机准备不代表远端已创建。
+首次运行看下方快速开始；了解架构和贡献看 [作品说明](docs/PORTFOLIO.md)；各类检查结果看 [报告导航](docs/reports/README.md)。代码保存在私有仓库 [tarot-divination-system](https://github.com/bowenx148-cmyk/tarot-divination-system)，中文展示名为“塔罗占卜系统”。访问代码需要仓库权限。
 
 ```text
 app/          页面、组件与API路由
@@ -58,8 +58,8 @@ flowchart LR
 完整开发/测试环境建议Node.js 24.15+或26+（jsdom要求）；当前本机24.14.1可运行，但安装会提示引擎版本警告；npm与package-lock.json保持一致。
 
 ```bash
-git clone <your-repository-url>
-cd <your-repository-directory>
+git clone https://github.com/bowenx148-cmyk/tarot-divination-system.git
+cd tarot-divination-system
 npm ci
 cp .env.example .env.local
 npm run dev
@@ -85,7 +85,7 @@ npm run build
 npm run start -- --hostname 127.0.0.1 --port 3000
 ```
 
-GitHub Actions执行类型检查、测试、代理权限自检和构建；仓库尚未发布时不能宣称CI已在GitHub运行。历史验收数字见 [SPEC](docs/SPEC.md)，本轮独立安装与发布检查见 [报告](docs/reports/publication/PUBLICATION-READINESS-2026-10-13.md)。测试通过不证明模型回答准确或高并发能力。
+GitHub Actions执行类型检查、测试、代理权限自检和构建；实际结果见仓库的 [Actions](https://github.com/bowenx148-cmyk/tarot-divination-system/actions)。历史验收数字见 [SPEC](docs/SPEC.md)，本轮独立安装与发布检查见 [报告](docs/reports/publication/PUBLICATION-READINESS-2026-10-13.md)。测试通过不证明模型回答准确或高并发能力。
 
 ## 使用与权限边界
 
