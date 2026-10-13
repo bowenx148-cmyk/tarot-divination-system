@@ -53,27 +53,102 @@ flowchart LR
 
 这是单机应用：账号、知识库、密钥配置与持久试用账本使用私有JSON文件。Redis只用于可选的原限流/计数层，不能替代上述文件或提供多实例协调。部署与配置见 [DEPLOYMENT](docs/DEPLOYMENT.md)，当前运维记录见 [OPERATIONS](docs/OPERATIONS.md)。
 
-## 快速开始
+## 本地部署与打开方式
 
-完整开发/测试环境建议Node.js 24.15+或26+（jsdom要求）；当前本机24.14.1可运行，但安装会提示引擎版本警告；npm与package-lock.json保持一致。
+本项目需要先启动 Node.js 服务，再通过浏览器使用。下载代码后不能直接双击 HTML 文件运行。以下步骤是在**使用者自己的电脑**上执行；启动后打开的 `localhost` 也是这台电脑，不是项目作者的电脑。GitHub 仓库地址用于下载代码，不是在线占卜网址。
+
+### 1. 准备环境
+
+安装 [Node.js](https://nodejs.org/) 和 [Git](https://git-scm.com/)。Node.js 使用 **24.15.0 及以上的 24.x 版本，或 26 及以上版本**，与 package.json 的 engines 要求一致；npm 随 Node.js 一起安装。安装完成后重新打开终端，检查：
+
+```bash
+node --version
+npm --version
+git --version
+```
+
+Windows 可以使用 PowerShell 或命令提示符。若 PowerShell 提示禁止运行 npm.ps1，下文所有 npm 命令都使用 `npm.cmd`，无需修改系统执行策略。本地单实例使用不必安装 Redis 或数据库；安装依赖和调用 AI 需要网络连接。
+
+### 2. 下载代码
+
+在你想保存项目的文件夹中打开终端，执行：
 
 ```bash
 git clone https://github.com/bowenx148-cmyk/tarot-divination-system.git
 cd tarot-divination-system
-npm ci
-cp .env.example .env.local
-npm run dev
 ```
 
-Windows PowerShell复制配置：
+如果仓库为私有，需先请维护者邀请你的 GitHub 账号，接受邀请后再下载；出现 404 或 Repository not found 时先检查账号权限。Git 提示登录时，在官方登录页面完成验证。
+
+也可以在已获访问权限的 GitHub 仓库页面点击 **Code → Download ZIP**，解压后进入包含 `package.json` 的文件夹，再打开终端。从 ZIP 下载无需 Git；后续安装、配置和启动步骤相同。
+
+### 3. 安装、配置并启动
+
+**Windows PowerShell / 命令提示符：** 在项目文件夹中依次执行，上一条成功后再执行下一条。
 
 ```powershell
+npm.cmd ci
 Copy-Item .env.example .env.local
+npm.cmd run build
+npm.cmd run start -- --hostname 127.0.0.1 --port 3000
 ```
 
-打开 http://localhost:3000。不配置Redis即可使用界面、抽牌与牌义手册。个人API Key可在页面设置；系统Key可通过私有环境变量或开发者后台配置。不填任何Key时无法AI解析，不能将其宣传为默认提供免费模型服务。
+其中 `Copy-Item` 是 PowerShell 命令；如果使用命令提示符，把这一行换成 `copy .env.example .env.local`。`.env.local` 只在首次安装时复制；已经配置过的文件不要覆盖。使用个人 API Key 时，里面的系统密钥、开发者账号和 Redis 配置都可以留空。
 
-开发者后台没有默认账号。需要时设置DEVELOPER_USERNAME和DEVELOPER_PASSWORD，首次密码至少12字符。账号配置留空时新部署不启用后台登录。不要把真实值提交Git；全部变量与初始化/备份限制见 [.env.example](.env.example) 与部署文档。
+**macOS / Linux：**
+
+```bash
+npm ci
+cp .env.example .env.local
+npm run build
+npm run start -- --hostname 127.0.0.1 --port 3000
+```
+
+首次构建需要等待。终端出现 `Ready`，并显示地址 `http://127.0.0.1:3000`，表示服务已启动。此时保持终端运行，在浏览器打开：
+
+**[http://localhost:3000](http://localhost:3000)**（也可以用 [http://127.0.0.1:3000](http://127.0.0.1:3000)）。
+
+不要把这个地址发给别人作为公网链接；别人的 `localhost` 指向他们自己的电脑。当前启动命令只允许本机访问，公网部署另见 [部署文档](docs/DEPLOYMENT.md)。
+
+### 4. 配置自己的 API Key 并开始使用
+
+1. 打开首页，在“使用者登录 / 咨询记忆”中注册用户名；下次输入同一个用户名登录，英文不区分大小写。也可作为游客使用，游客历史仅保存在本浏览器。
+2. **先注册或登录，再配置 Key。** 注册、退出或切换账号会清除当前个人 Key，避免共用设备串用密钥。
+3. 点击右上角 **API设置**，在“AI 服务与模型”中选择供应商和模型。例如 DeepSeek 选择 `deepseek-flash`，OpenAI 选择 `gpt-5.4-mini`；填写同一供应商的有效 API Key。弹窗内“配置教程”提供获取与填写方法。
+4. 点击“保存”。Key 的账户需要有可用 API 额度或余额；网页聊天订阅不代表具备 API 调用额度。个人 Key 的费用由你自己的供应商账户承担。
+5. 输入问题，选择牌阵并查看牌位说明，使用点选或报数抽牌，确认牌组后点击“开始解析”。正常情况下结果页会逐步显示“核心建议”“AI 深度解析”和本次知识参考。
+6. 登录用户可在“历史记录”恢复此前的咨询。本地部署的账号与历史保存在本次项目的 `.local` 目录；保留该目录才能保留记录，下载另一份代码不会自动带入原来的历史。
+
+新下载的项目不包含作者的系统 Key；**没有配置任何 Key 时，不能生成 AI 解读**。系统免费试用只有在部署者配置系统 Key 后才能实际调用。关闭“在本设备记住 Key”后，刷新页面需要重新输入。
+
+### 5. 下次打开与停止
+
+下次使用时，在同一个项目文件夹打开终端，Windows 执行：
+
+```powershell
+npm.cmd run start -- --hostname 127.0.0.1 --port 3000
+```
+
+macOS / Linux 使用对应的 `npm run start -- --hostname 127.0.0.1 --port 3000`。启动后仍在浏览器打开 [http://localhost:3000](http://localhost:3000)。代码或依赖更新后需按更新内容重新安装依赖、执行 `npm run build` 再启动；单纯再次使用不需要每次安装和构建。
+
+终端按 **Ctrl+C** 可停止服务。终端关闭或电脑关机后，网页就无法继续调用本地服务；下次启动即可继续使用保留下来的记录。
+
+需要修改代码时，可以使用 `npm run dev` 启动开发模式，浏览器地址以终端显示为准；普通使用者按上面的构建与启动步骤即可。
+
+### 常见问题
+
+| 现象 | 处理方法 |
+|---|---|
+| 仓库 404 / Repository not found | 检查 GitHub 账号是否有私有仓库权限，并确认已经接受邀请。 |
+| 找不到 node / npm / git | 完成安装后重新打开终端；检查安装程序是否加入 PATH。 |
+| 提示 EBADENGINE | 用 `node --version` 检查版本，安装满足上述 engines 要求的 Node.js。 |
+| 提示找不到 package.json | 终端应位于包含 `package.json` 的项目根目录，不是外层解压文件夹。 |
+| 提示 Could not find a production build | 先执行 `npm run build`，成功后再运行 `npm run start`。 |
+| 3000 端口被占用 / EADDRINUSE | 改用 `npm run start -- --hostname 127.0.0.1 --port 3006`，然后打开 `http://localhost:3006`；Windows 使用 `npm.cmd`。 |
+| 浏览器打不开本地地址 | 确认终端服务仍在运行、已经出现 Ready，浏览器端口与启动命令一致。 |
+| 提示未配置密钥 / Key 无效 / 余额不足 | 登录后重新检查 API设置、供应商、Key 和 API 账户余额；保留原牌组重试，无需重新抽牌。 |
+
+如需启用开发者后台，设置 `.env.local` 中的 `DEVELOPER_USERNAME` 和 `DEVELOPER_PASSWORD`，首次密码至少12字符；新部署没有默认开发者账号。重启服务后打开 [http://localhost:3000/developer](http://localhost:3000/developer)。所有变量与备份要求见 [.env.example](.env.example) 和 [部署文档](docs/DEPLOYMENT.md)，不要把真实配置提交到 GitHub。
 
 ## 验证与生产运行
 
