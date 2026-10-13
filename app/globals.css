@@ -1,0 +1,626 @@
+@import "tailwindcss";
+
+.brand-heading {
+  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  letter-spacing: .08em;
+}
+
+/* Draw-only ornament: twelve particles and two orbits, no canvas render loop. */
+.draw-atmosphere { position: fixed; inset: 0; overflow: hidden; pointer-events: none; background: radial-gradient(ellipse at 15% 20%, #e0eadf 0, transparent 48%), radial-gradient(ellipse at 85% 75%, #fff1d6 0, transparent 45%); }
+.draw-orbit { position: absolute; top: 10%; left: 50%; width: min(90vw, 780px); aspect-ratio: 1; border: 1px solid #72958026; border-radius: 50%; transform: translateX(-50%); box-shadow: 0 0 70px #72958012; }
+.draw-orbit-inner { top: 20%; width: min(70vw, 550px); border-style: dashed; }
+.draw-atmosphere i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #739782; opacity: .25; }
+.draw-atmosphere-animated i { animation: draw-drift 6s ease-in-out infinite alternate; }
+.draw-reveal-glow { border-radius: 1rem; animation: draw-glow 1.1s ease-out; }
+@keyframes draw-drift { to { transform: translateY(-18px); opacity: .65; } }
+/* A filter on the rotating parent flattens its 3D faces; shadows preserve them. */
+@keyframes draw-glow { 0% { box-shadow: 0 0 2px #d4af3733; } 45% { box-shadow: 0 0 22px #d4af37bb; } 100% { box-shadow: 0 0 5px #d4af3744; } }
+
+/* 夜空风主题色（规格 G7）:Tailwind v4 @theme 注册自定义颜色 */
+@theme {
+  --color-gold: #d4af37;
+  --color-gold-light: #e8c86a;
+  --color-astro-deep: #102b26;
+  --color-astro-mid: #21453b;
+  /* Existing purple utility names are retained as compatibility aliases. */
+  --color-purple-50: #f0f6f1;
+  --color-purple-100: #dfebe2;
+  --color-purple-200: #bfd5c6;
+  --color-purple-300: #94b8a0;
+  --color-purple-400: #689881;
+  --color-purple-500: #39745e;
+  --color-purple-600: #285e49;
+  --color-purple-700: #204d3c;
+  --color-purple-800: #1b3e32;
+  --color-purple-900: #163229;
+  --color-purple-950: #0c211b;
+}
+
+/* === 基础变量定义 === */
+@layer base {
+  :root {
+    /* 浅色主题配色 */
+    --background: #faf7ef;
+    --background-secondary: #f1eee3;
+    --background-card: #fffdf7;
+    --foreground: #213c32;
+    --foreground-muted: #637268;
+
+    /* 品牌色 - 墨绿与暖金 */
+    --primary: #285e49;
+    --primary-hover: #204d3c;
+    --primary-light: #689881;
+
+    /* 装饰色 */
+    --accent-purple: #39745e;
+    --accent-light-purple: #94b8a0;
+
+    /* 紫色系渐变层级（规格 O2 迁移自 ui.module.css 所需） */
+    --purple-50: #f0f6f1;
+    --purple-100: #dfebe2;
+    --purple-200: #bfd5c6;
+    --purple-300: #94b8a0;
+
+    /* 装饰渐变辅助色（mystical-bg/stars 使用） */
+    --secondary: #b8cdbd;
+    --accent: #ead9ae;
+
+    /* 夜空风主题（规格 G7 结果页） */
+    --gold: #d4af37;
+    --gold-light: #e8c86a;
+    --astro-deep: #102b26;
+    --astro-mid: #21453b;
+    --astro-glow: rgba(212, 175, 55, 0.15);
+
+    /* 功能色 */
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+
+    /* 边框和分割线 */
+    --border: #d5dfd4;
+    --border-light: #e9eee5;
+
+    /* 阴影 */
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-colored: rgba(40, 94, 73, 0.2);
+
+    /* 文字颜色 */
+    --text-dark: #374151;
+    --text-light: #9ca3af;
+    
+    /* 其他颜色 */
+    --white: #ffffff;
+    --black: #000000;
+  }
+
+  /* 全局重置 */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* 根字体设置 */
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  /* 主体样式 */
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 链接样式 */
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--primary-light);
+  }
+
+  /* 输入焦点样式 */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* 选择文本样式 */
+  ::selection {
+    background: var(--primary-light);
+    color: white;
+  }
+}
+
+/* === 组件样式 === */
+@layer components {
+  /* 按钮样式 */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    border: 1px solid var(--primary);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-colored);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--primary);
+    color: white;
+  }
+
+  /* 卡片样式 */
+  .card {
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px var(--shadow);
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+
+  /* 输入框样式 */
+  .input {
+    @apply w-full px-4 py-3 bg-white border rounded-lg transition-all duration-200;
+    border-color: var(--border);
+    color: var(--foreground);
+  }
+
+  .input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(40, 94, 73, 0.1);
+  }
+
+  .input::placeholder {
+    color: var(--foreground-muted);
+  }
+
+  /* 渐变文字 */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* 问题标签样式 */
+  .question-tag {
+    @apply px-4 py-2 bg-purple-50 border border-purple-200 rounded-full text-purple-700 cursor-pointer transition-all duration-200 hover:bg-purple-100 hover:border-purple-300;
+  }
+
+  /* === 设计系统：mystical 系列（规格 O2：自 ui.module.css 迁移，三页共用） === */
+
+  /* 清新背景 */
+  .mystical-bg {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      var(--background) 0%,
+      var(--purple-50) 50%,
+      var(--purple-100) 100%
+    );
+  }
+
+  .mystical-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, var(--purple-300) 0%, transparent 60%),
+      radial-gradient(circle at 80% 80%, var(--secondary) 0%, transparent 60%),
+      radial-gradient(circle at 40% 60%, var(--accent) 0%, transparent 70%);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  /* 轻柔装饰效果(已移除圆点,保留空容器避免破坏 JSX 引用) */
+  .stars {
+    display: none;
+  }
+
+  /* 卡片样式 */
+  .mystical-card {
+    border: 1px solid var(--purple-200);
+    border-radius: 20px;
+    box-shadow:
+      0 10px 25px var(--shadow),
+      0 4px 8px rgba(40, 94, 73, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .mystical-card:hover {
+    box-shadow:
+      0 10px 25px var(--shadow),
+      0 4px 8px rgba(40, 94, 73, 0.05);
+    transform: translateY(-2px);
+  }
+
+  /* 按钮样式 */
+  .mystical-button {
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-hover) 100%
+    );
+    border: none;
+    border-radius: 16px;
+    color: var(--white);
+    font-weight: 600;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(40, 94, 73, 0.2);
+  }
+
+  .mystical-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .mystical-button:hover::before {
+    left: 100%;
+  }
+
+  .mystical-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(40, 94, 73, 0.4);
+  }
+
+  .mystical-button:active {
+    transform: translateY(-1px);
+  }
+
+  /* 输入框样式 */
+  .mystical-input {
+    background: rgba(253, 253, 253, 0.4);
+    border: 2px solid var(--purple-200);
+    border-radius: 16px;
+    color: var(--text-dark);
+    padding: 18px 20px;
+    width: 100%;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(40, 94, 73, 0.12);
+  }
+
+  .mystical-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow:
+      0 20px 40px var(--shadow),
+      0 8px 16px rgba(40, 94, 73, 0.1),
+      0 0 0 1px var(--primary-light);
+  }
+
+  .mystical-input::placeholder {
+    color: var(--text-light);
+  }
+
+  /* 响应式间距优化 */
+  @media (max-width: 640px) {
+    .mystical-card {
+      border-radius: 16px;
+      padding: 1.5rem !important;
+      margin: 0 1rem;
+    }
+
+    .mystical-button {
+      padding: 12px 24px;
+    }
+
+    .mystical-input {
+      padding: 16px 18px;
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mystical-card {
+      margin: 0 0.75rem;
+      padding: 1.25rem !important;
+    }
+  }
+
+  /* === 夜空风主题（规格 G7 结果页专属，不污染浅色 mystical 体系） === */
+
+  /* 深邃夜空背景:深紫→藏蓝渐变 + 微光晕 */
+  .astro-bg {
+    position: relative;
+    background:
+      radial-gradient(
+        ellipse 120% 80% at 50% -10%,
+        rgba(40, 94, 73, 0.25) 0%,
+        transparent 60%
+      ),
+      linear-gradient(180deg, var(--astro-deep) 0%, #17392f 45%, #0a1d18 100%);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* 夜空星点(深色版) */
+  .astro-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .astro-stars::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow:
+      120px 180px 0 0 rgba(255, 255, 255, 0.6),
+      240px 90px 0 0 rgba(212, 175, 55, 0.7),
+      340px 260px 0 0 rgba(255, 255, 255, 0.4),
+      60px 320px 0 0 rgba(212, 175, 55, 0.5),
+      460px 140px 0 0 rgba(255, 255, 255, 0.5),
+      200px 400px 0 0 rgba(255, 255, 255, 0.3),
+      520px 300px 0 0 rgba(212, 175, 55, 0.4),
+      150px 480px 0 0 rgba(255, 255, 255, 0.35);
+    animation: twinkle 4s ease-in-out infinite;
+  }
+
+  /* 玻璃拟态卡片 */
+  .astro-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  }
+
+  .astro-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--gold) 50%,
+      transparent
+    );
+    opacity: 0.5;
+  }
+
+  /* 小节标题:小号大写 + 金线 */
+  .astro-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .astro-card-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0.5;
+  }
+
+  /* 玻璃按钮 */
+  .astro-button {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .astro-button:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: var(--gold);
+    color: var(--gold-light);
+    box-shadow: 0 4px 20px var(--astro-glow);
+  }
+
+  /* 区块细分隔线 */
+  .astro-divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.12) 30%,
+      rgba(255, 255, 255, 0.12) 70%,
+      transparent
+    );
+  }
+
+  /* 3D 翻转效果样式 */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+/* === 工具类 === */
+@layer utilities {
+  /* 动画类 */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  /* 布局工具 */
+  .container-main {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  /* 响应式隐藏 */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* === 动画定义 === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* === 自定义滚动条 === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
+}
+
+/* === 媒体查询 === */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* === 无障碍：减弱动态效果（规格 G17） ===
+   framer-motion 一侧由 <MotionProvider> 的 MotionConfig reducedMotion="user" 覆盖；
+   这里负责 CSS 一侧——本仓库实际的无限 CSS 动画是：
+     .astro-stars::before 的 twinkle（注意 .stars 是 display:none，与动画无关）
+     Tailwind 的 animate-pulse（首页骨架屏、SpreadSlots 聚焦空位）
+   用通配符统一降到一帧，避免逐类枚举漏掉将来新增的动画。 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

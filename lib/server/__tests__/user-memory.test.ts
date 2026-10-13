@@ -1,0 +1,36 @@
+import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { NextRequest } from 'next/server';
+import { GET, POST } from '@/app/api/user-memory/route';
+let directory: string;
+const request = (body: unknown, cookie = '', origin = 'http://localhost:3000') => new NextRequest('http://localhost:3000/api/user-memory', { method: 'POST', headers: { origin, cookie, 'x-device-id': 'test-device-' + String((body as { name?: string }).name || 'default') }, body: JSON.stringify(body) });
+beforeEach(() => { directory = mkdtempSync(join(tmpdir(), 'tarot-memory-')); vi.stubEnv('TAROT_DATA_DIR', directory); });
+afterEach(() => { vi.unstubAllEnvs(); rmSync(directory, { recursive: true, force: true }); });
+it('用户名大小写不敏感，未注册拒绝，重复注册拒绝', async () => {
+  expect((await POST(request({ action: 'login', name: 'missing' }))).status).toBe(400);
+  const created = await POST(request({ action: 'register', name: 'Alice' }));
+  expect(created.status).toBe(200);
+  const first = await created.json();
+  expect((await POST(request({ action: 'register', name: 'ALICE' }))).status).toBe(400);
+  const logged = await POST(request({ action: 'login', name: 'aLiCe' }));
+  expect((await logged.json()).user.id).toBe(first.user.id);
+});
+it('登录持久恢复自己的咨询，档案切换校验、访客和跨源写入被拒绝，退出失效', async () => {
+  const a = await POST(request({ action: 'register', name: 'A' }));
+  const cookieA = a.headers.get('set-cookie')!.split(';')[0]; const userA = (await a.json()).user;
+  const b = await POST(request({ action: 'register', name: 'B' }));
+  const cookieB = b.headers.get('set-cookie')!.split(';')[0]; const userB = (await b.json()).user;
+  const reading = { id: 'record', question: '感情', interpretation: '私有解读', advice: '沟通', timestamp: new Date().toISOString(), cards: [], cardReversals: [], spread: { name: '单牌', positions: [] } };
+  expect((await POST(request({ action: 'save', userId: userA.id, readings: [reading] }, cookieA))).status).toBe(200);
+  expect((await POST(request({ action: 'save', userId: userA.id, readings: [] }, cookieB))).status).toBe(400);
+  expect((await POST(request({ action: 'save', userId: userB.id, readings: [] }))).status).toBe(401);
+  expect((await POST(request({ action: 'logout' }, cookieA, 'https://other.example'))).status).toBe(403);
+  const savedB = await GET(new NextRequest('http://localhost:3000/api/user-memory', { headers: { cookie: cookieB } }));
+  expect((await savedB.json()).readings).toEqual([]);
+  const relogged = await POST(request({ action: 'login', name: 'a' }));
+  expect((await relogged.json()).readings[0].interpretation).toBe('私有解读');
+  await POST(request({ action: 'logout' }, cookieA));
+  expect((await (await GET(new NextRequest('http://localhost:3000/api/user-memory', { headers: { cookie: cookieA } }))).json()).user).toBeNull();
+});

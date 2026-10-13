@@ -1,0 +1,57 @@
+{
+  "name": "indigo-tarot",
+  "version": "0.1.0",
+  "private": true,
+  "author": {
+    "name": "Indigo Qiu",
+    "email": "hammer.root.931@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HammerRoot/indigo-tarot.git"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "type-check": "tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:watch": "vitest watch",
+    "pre-commit": "npm run type-check && npm run lint",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "ahooks": "^3.9.6",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.33.0",
+    "ioredis": "^6.0.0",
+    "lucide-react": "^0.563.0",
+    "next": "16.3.8",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-markdown": "^10.1.0",
+    "zustand": "^5.0.11"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.1.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.8",
+    "husky": "^9.1.7",
+    "jsdom": "^30.0.1",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5",
+    "vitest": "^4.1.11"
+  },
+  "engines": {
+    "node": "^24.15.0 || >=26.0.0"
+  }
+}

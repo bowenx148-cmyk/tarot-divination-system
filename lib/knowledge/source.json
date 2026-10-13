@@ -1,0 +1,9 @@
+{
+  "retrieved": "2026-10-09",
+  "source": "https://raw.githubusercontent.com/Tarotoo-com/tarotoo-tarot-dataset/main/data/cards.json",
+  "license": "MIT",
+  "sha256": "0298c51ed61374e440612c3454bd5e8e1fb25abe959e59d6442f6cd7a61beb41",
+  "cards": 78,
+  "revision": "main snapshot via web reader, JSON reformatted",
+  "editorialNotes": "624 local Chinese domain entries; source distinguishes AI-assisted material"
+}
