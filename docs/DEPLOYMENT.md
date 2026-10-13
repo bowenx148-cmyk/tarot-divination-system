@@ -47,4 +47,4 @@ trial-ledger.lock异常遗留时，先确认所有相关进程停止，再处理
 
 Redis未配置时原缓存/统计回退内存，但当前trial-ledger.json正常重启仍保留已用试用及每日限额。聚合统计与账号历史不同；不要将匿名统计说明写成服务器不保存任何咨询。
 
-Windows Git Bash的npm路径若使提交钩子报127，可先在PowerShell执行npm.cmd run pre-commit。只有检查确实通过时才考虑该次提交使用git -c core.hooksPath= commit；不应永久关闭钩子或把检查失败当作路径错误。本轮记录见reports/PUBLICATION-READINESS-2026-10-13.md。
+Windows Git Bash的npm路径若使提交钩子报127，可先在PowerShell执行npm.cmd run pre-commit。只有检查确实通过时才考虑该次提交使用git -c core.hooksPath= commit；不应永久关闭钩子或把检查失败当作路径错误。本轮记录见reports/publication/PUBLICATION-READINESS-2026-10-13.md。

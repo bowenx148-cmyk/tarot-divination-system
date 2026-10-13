@@ -138,9 +138,11 @@
 
 ## 2026-10-09 本地功能验收
 
-- 2026-10-13：GitHub发布准备技术检查与修复已执行，公开授权尚未通过。无默认开发者凭据、私有截图不追踪、配置/README更新、CI及独立副本已落地；Next同系列安全补丁、系统字体及私有目录扫描排除完成。最终独立副本61文件400项测试、类型、生产构建与运行权限/无Key验证通过。生产依赖审计0项，开发工具链仍5条；牌图授权缺口和剩余验收保留在 [规格](plan/publication-readiness.md)，证据见 [检查报告](reports/PUBLICATION-READINESS-2026-10-13.md)。未发布远端。
+- 2026-10-13：项目展示名改为“塔罗占卜系统”，文档报告按用途分组并增加导航，33条相关相对链接通过，源码/牌图/测试保留原框架目录。私有GitHub仓库尚待实际账号登录，状态见 [规格](plan/repository-navigation.md)，不宣称远端已创建。
 
-- 2026-10-13：墨绿暖金主题与来源说明完成，见 [归档](archive/forest-theme.md)。首页、抽牌与结果主题统一，首页及README说明上游来源和二次开发贡献；原许可证不变。类型、相关ESLint、43项页面/样式回归及生产构建通过；Edge桌面和390px视口检验配色、来源链接、78张牌、翻牌及无溢出通过。截图见 [视觉验收](reports/FOREST-THEME-2026-10-13.md)。
+- 2026-10-13：GitHub发布准备技术检查与修复已执行，公开授权尚未通过。无默认开发者凭据、私有截图不追踪、配置/README更新、CI及独立副本已落地；Next同系列安全补丁、系统字体及私有目录扫描排除完成。最终独立副本61文件400项测试、类型、生产构建与运行权限/无Key验证通过。生产依赖审计0项，开发工具链仍5条；牌图授权缺口和剩余验收保留在 [规格](plan/publication-readiness.md)，证据见 [检查报告](reports/publication/PUBLICATION-READINESS-2026-10-13.md)。未发布远端。
+
+- 2026-10-13：墨绿暖金主题与来源说明完成，见 [归档](archive/forest-theme.md)。首页、抽牌与结果主题统一，首页及README说明上游来源和二次开发贡献；原许可证不变。类型、相关ESLint、43项页面/样式回归及生产构建通过；Edge桌面和390px视口检验配色、来源链接、78张牌、翻牌及无溢出通过。截图见 [视觉验收](reports/interface/FOREST-THEME-2026-10-13.md)。
 
 - 开发者管理、双API提供商、语言优化、历史连续咨询、报数抽牌：✅ 已实现并本地验收；380项全量测试通过，后续首页变更另跑29项回归；类型检查、lint、生产构建通过。过程见 [归档](archive/developer-consultation.md)，操作示例见 [示例](EXAMPLE-DEVELOPER-SHARING.md)。真实模型和视觉验收未执行。
 
@@ -156,4 +158,4 @@
 - 2026-10-09：解读、知识管理、参考快照与持久试用限制完成，见 archive/knowledge-and-trial-upgrade.md。394项全量测试及后续相关校验测试、类型/代码检查通过；真实DeepSeek资料传递验证及公网注册/试用/重启验证通过。方案三暂缓见 plan/style-examples.md。
 - 2026-10-09：首页简化与API教程归档，见 archive/openai-settings-guide.md；后续用户明确恢复DeepSeek，当前保留两家配置。公网分享归档见 archive/public-sharing.md，使用ngrok并仅本机开放开发者管理。
 
-- 2026-10-10：教学知识、自然解读与抽牌体验完成，见 [归档](archive/night-upgrade.md)。追加24条带来源摘要并保留原资料，参考标题与快照可见；点选与报数支持默认静音的合成音效、音量和简化动画。61文件399项全量测试、类型、相关代码检查、生产构建及公网隔离检查通过；实际Edge桌面/移动视口验证和两轮共6次DeepSeek请求已记录。实体手机音频未验证。求职、开源和盈利调研见 [报告](reports/TAROT-PRODUCT-RESEARCH-2026-10-10.md)，后续规划见 plan/portfolio-commercial-roadmap.md，方案三仍见 plan/style-examples.md。
+- 2026-10-10：教学知识、自然解读与抽牌体验完成，见 [归档](archive/night-upgrade.md)。追加24条带来源摘要并保留原资料，参考标题与快照可见；点选与报数支持默认静音的合成音效、音量和简化动画。61文件399项全量测试、类型、相关代码检查、生产构建及公网隔离检查通过；实际Edge桌面/移动视口验证和两轮共6次DeepSeek请求已记录。实体手机音频未验证。求职、开源和盈利调研见 [报告](reports/research/TAROT-PRODUCT-RESEARCH-2026-10-10.md)，后续规划见 plan/portfolio-commercial-roadmap.md，方案三仍见 plan/style-examples.md。

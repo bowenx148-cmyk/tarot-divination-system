@@ -1,5 +1,7 @@
 # indigo-tarot 文档
 
+报告目录按publication/research/interface/operations分组，入口见 [报告导航](reports/README.md)。业务源码仍按Next.js约定组织；框架配置和LICENSE保留根目录，避免破坏运行与授权信息。
+
 > **本文只负责两件事**：① 文档规则与职责划分；② 脱敏说明。
 > **本文不写**：部署步骤（→ [`DEPLOYMENT.md`](./DEPLOYMENT.md)）、运维现状与台账
 > （→ [`OPERATIONS.md`](./OPERATIONS.md)）、规格条目状态与决策记录（→ [`SPEC.md`](./SPEC.md)）、

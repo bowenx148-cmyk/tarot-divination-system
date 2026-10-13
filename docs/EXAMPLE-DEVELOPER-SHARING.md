@@ -28,7 +28,7 @@ DeepSeek 账户余额不足时，解读接口返回 HTTP 402，页面提示 API 
 
 ## 后台 DeepSeek 系统密钥
 
-发布版没有默认开发者凭据：新部署先私有配置DEVELOPER_USERNAME/DEVELOPER_PASSWORD（首次至少12字符），再打开本机后台。既有auth.json的密码哈希和加密秘密保留，修改环境密码不会自动重置。独立副本实测未配置后台登录HTTP401、未配置Key解析HTTP400且needApiKey=true；完整检查见reports/PUBLICATION-READINESS-2026-10-13.md。
+发布版没有默认开发者凭据：新部署先私有配置DEVELOPER_USERNAME/DEVELOPER_PASSWORD（首次至少12字符），再打开本机后台。既有auth.json的密码哈希和加密秘密保留，修改环境密码不会自动重置。独立副本实测未配置后台登录HTTP401、未配置Key解析HTTP400且needApiKey=true；完整检查见reports/publication/PUBLICATION-READINESS-2026-10-13.md。
 
 本机开发者登录后填写 DeepSeek 系统 API Key，点击保存全局设置。输入框清空，状态显示已配置；再次留空保存会保留旧密钥。清除后台 DeepSeek Key 仅清除该服务密钥。用户选择 DeepSeek 并留空个人密钥时使用系统试用，费用由系统账户承担。后台仍仅限本机访问。真实回归输出：Tests 4 passed (4)。
 
@@ -60,10 +60,10 @@ DeepSeek 账户余额不足时，解读接口返回 HTTP 402，页面提示 API 
 
 ## 教学资料与抽牌声音（2026-10-10）
 
-视觉主题现为墨绿、暖金与米白，首页底部保留 indigo-tarot 上游链接，README说明二次开发贡献。截图见 [视觉验收](reports/FOREST-THEME-2026-10-13.md)。浏览器实测关键输出：greenHeading=true、attribution=true、deck=78、flip=true、overflow=false、errors=0（1280px与390px视口）。主题不改变牌序、模型与用户历史。
+视觉主题现为墨绿、暖金与米白，首页底部保留 indigo-tarot 上游链接，README说明二次开发贡献。截图见 [视觉验收](reports/interface/FOREST-THEME-2026-10-13.md)。浏览器实测关键输出：greenHeading=true、attribution=true、deck=78、flip=true、overflow=false、errors=0（1280px与390px视口）。主题不改变牌序、模型与用户历史。
 
-在本机开发者后台查看知识库，可看到原两条资料与追加的24条教学摘要。选择感情、学业或收入问题并完成抽牌，结果显示本次参考标题，展开后能核对实际发送给模型的资料快照。真实生成原文见 [模型样本](reports/REAL-MODEL-SAMPLES-2026-10-10.md)；它们是开发验证场景，不是真实客户咨询或准确率统计。
+在本机开发者后台查看知识库，可看到原两条资料与追加的24条教学摘要。选择感情、学业或收入问题并完成抽牌，结果显示本次参考标题，展开后能核对实际发送给模型的资料快照。真实生成原文见 [模型样本](reports/research/REAL-MODEL-SAMPLES-2026-10-10.md)；它们是开发验证场景，不是真实客户咨询或准确率统计。
 
 抽牌页默认静音；点击音效开关后，可调整音量，再点选牌或提交报数。关闭声音会释放音频上下文，勾选简化动画后省去飞行效果；系统减少动画设置优先。实际Edge验证覆盖78张牌、点选与报数混合完成、静音不创建音频、开关释放资源、偏好恢复、桌面及390px视口无横向溢出。实体手机音色和Safari未验收。
 
-真实回归关键输出：Test Files 61 passed (61)，Tests 399 passed (399)。生产版公网健康检查HTTP200，知识管理HTTP403。正常关机后公网暂停，下次开机见 [启动说明](reports/START-AFTER-SHUTDOWN.md)。
+真实回归关键输出：Test Files 61 passed (61)，Tests 399 passed (399)。生产版公网健康检查HTTP200，知识管理HTTP403。正常关机后公网暂停，下次开机见 [启动说明](reports/operations/START-AFTER-SHUTDOWN.md)。

@@ -9,4 +9,4 @@
 
 本次不做完整历史脱敏、账户安全改造或版权结论；GitHub发布准备另见portfolio-commercial-roadmap.md。
 
-实际验收：类型、相关ESLint、38项页面回归和5项样式契约通过，生产构建通过。Edge 1280px与390px检查主题颜色、上游链接、78张牌与翻牌，无横向溢出或页面异常。截图见 ../reports/FOREST-THEME-2026-10-13.md。
+实际验收：类型、相关ESLint、38项页面回归和5项样式契约通过，生产构建通过。Edge 1280px与390px检查主题颜色、上游链接、78张牌与翻牌，无横向溢出或页面异常。截图见 ../reports/interface/FOREST-THEME-2026-10-13.md。

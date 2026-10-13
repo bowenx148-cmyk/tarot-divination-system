@@ -1,6 +1,6 @@
 # 来源与授权清单
 
-截至2026-10-13，本文件列出证据和未解决项，不是完整权属保证或法律意见。发布检查结果见docs/reports/PUBLICATION-READINESS-2026-10-13.md。
+截至2026-10-13，本文件列出证据和未解决项，不是完整权属保证或法律意见。发布检查结果见docs/reports/publication/PUBLICATION-READINESS-2026-10-13.md。
 
 | 内容 | 来源/证据 | 当前状态 |
 |---|---|---|

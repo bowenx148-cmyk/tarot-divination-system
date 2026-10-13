@@ -8,8 +8,8 @@
 
 视觉差异不构成独立原创或版权判断。此版本基于 indigo-tarot；保留署名和许可证，新增功能应结合提交与代码说明，不能把上游代码全部宣称为本人独立实现。本次未发布GitHub，完整历史脱敏和素材权属检查不在本次范围。
 
-![桌面首页](assets/forest-home-1280.png)
+![桌面首页](../assets/forest-home-1280.png)
 
-![移动首页](assets/forest-home-390.png)
+![移动首页](../assets/forest-home-390.png)
 
-![抽牌](assets/forest-draw-390.png)
+![抽牌](../assets/forest-draw-390.png)

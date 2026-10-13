@@ -1,6 +1,27 @@
-# 塔罗指引：知识参考与咨询记忆
+# 塔罗占卜系统
 
 基于 Indigo Qiu 的 [indigo-tarot](https://github.com/HammerRoot/indigo-tarot) 二次开发的全栈AI咨询演示。保留根目录LICENSE（CC BY-NC 4.0）与原作者署名；不是从零原创，也不是训练过的塔罗模型。素材来源与未解决项见 [来源清单](THIRD_PARTY_NOTICES.md)，商业使用需另行核实授权。
+
+## 从哪里开始看
+
+首次运行看下方快速开始；了解架构和贡献看 [作品说明](docs/PORTFOLIO.md)；各类检查结果看 [报告导航](docs/reports/README.md)。计划使用私有GitHub仓库，地址标识为 `tarot-divination-system`，中文展示名为“塔罗占卜系统”；本机准备不代表远端已创建。
+
+```text
+app/          页面、组件与API路由
+lib/          抽牌、知识检索、状态和服务端逻辑
+public/       牌图等静态资源
+tests/        跨模块测试；组件测试保留在对应源码附近
+scripts/      启动、分享和验证脚本
+docs/
+  knowledge/  知识来源与说明
+  reports/    publication/发布检查  research/调研
+              interface/视觉验收    operations/运行说明
+  archive/    历史规格与工程记录
+  plan/       尚未执行或正在执行的事项
+.github/      自动检查工作流
+```
+
+根目录保留README、LICENSE、安全/来源说明和框架配置；不将密钥、运行数据、依赖或构建产物放进仓库。文件总数是递归数量，不需要把所有文件展开才能阅读。
 
 ## 功能与贡献范围
 
@@ -64,7 +85,7 @@ npm run build
 npm run start -- --hostname 127.0.0.1 --port 3000
 ```
 
-GitHub Actions执行类型检查、测试、代理权限自检和构建；仓库尚未发布时不能宣称CI已在GitHub运行。历史验收数字见 [SPEC](docs/SPEC.md)，本轮独立安装与发布检查见 [报告](docs/reports/PUBLICATION-READINESS-2026-10-13.md)。测试通过不证明模型回答准确或高并发能力。
+GitHub Actions执行类型检查、测试、代理权限自检和构建；仓库尚未发布时不能宣称CI已在GitHub运行。历史验收数字见 [SPEC](docs/SPEC.md)，本轮独立安装与发布检查见 [报告](docs/reports/publication/PUBLICATION-READINESS-2026-10-13.md)。测试通过不证明模型回答准确或高并发能力。
 
 ## 使用与权限边界
 
@@ -88,7 +109,7 @@ GitHub Actions执行类型检查、测试、代理权限自检和构建；仓库
 
 ## 演示、贡献与许可
 
-界面截图见 [视觉验收](docs/reports/FOREST-THEME-2026-10-13.md)，演示流程和面试解释见 [作品说明](docs/PORTFOLIO.md)。素材授权缺口仍在 [来源清单](THIRD_PARTY_NOTICES.md)，不是全部权属已获验证的声明。
+界面截图见 [视觉验收](docs/reports/interface/FOREST-THEME-2026-10-13.md)，演示流程和面试解释见 [作品说明](docs/PORTFOLIO.md)。素材授权缺口仍在 [来源清单](THIRD_PARTY_NOTICES.md)，不是全部权属已获验证的声明。
 
 欢迎针对二次开发版本提供问题和修复：创建feature/或bug-fix/分支，附复现与相应检查，提交到该版本实际发布的仓库。上游链接表示来源，不代表上游作者维护此版本或为新增功能背书。不得在公开Issue贴真实Key或用户咨询；安全报告见SECURITY.md。
 

@@ -170,4 +170,4 @@ clone 成功（236 objects / 29.44 MiB / 4.59 MiB/s）。
 
 本机私有知识库追加24条教学资料，原条目保留；更新备份在 `.local/knowledge-before-night.json`。通用部署已有知识库不会自动覆盖，导入 `lib/knowledge/teaching-notes.json` 时留意重复ID。正文来源标记由模型生成，完整参考快照才是实际请求记录。
 
-音效使用Web Audio合成，默认静音；不支持或解锁失败时降级为无声抽牌。设置保存于浏览器`tarot-draw-preferences`，受系统减少动画偏好约束。验证使用Edge桌面与390px移动视口模拟，未验证实体手机扬声器/Safari和主观音色；正常关机后公网暂停，启动见 reports/START-AFTER-SHUTDOWN.md。
+音效使用Web Audio合成，默认静音；不支持或解锁失败时降级为无声抽牌。设置保存于浏览器`tarot-draw-preferences`，受系统减少动画偏好约束。验证使用Edge桌面与390px移动视口模拟，未验证实体手机扬声器/Safari和主观音色；正常关机后公网暂停，启动见 reports/operations/START-AFTER-SHUTDOWN.md。
