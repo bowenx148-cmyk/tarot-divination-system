@@ -1,10 +1,10 @@
 # 塔罗占卜系统
 
-基于 Indigo Qiu 的 [indigo-tarot](https://github.com/HammerRoot/indigo-tarot) 二次开发的全栈AI咨询演示。保留根目录LICENSE（CC BY-NC 4.0）与原作者署名；不是从零原创，也不是训练过的塔罗模型。素材来源与未解决项见 [来源清单](THIRD_PARTY_NOTICES.md)，商业使用需另行核实授权。
+基于 Indigo Qiu 的 [indigo-tarot](https://github.com/HammerRoot/indigo-tarot) 二次开发的全栈AI咨询演示。素材来源与未解决项见 [来源清单](THIRD_PARTY_NOTICES.md)，商业使用需另行核实授权。
 
 ## 从哪里开始看
 
-首次运行看下方快速开始；了解架构和贡献看 [作品说明](docs/PORTFOLIO.md)；各类检查结果看 [报告导航](docs/reports/README.md)。代码保存在私有仓库 [tarot-divination-system](https://github.com/bowenx148-cmyk/tarot-divination-system)，中文展示名为“塔罗占卜系统”。访问代码需要仓库权限。
+首次运行看下方快速开始；了解架构和贡献看 [作品说明](docs/PORTFOLIO.md)；各类检查结果看 [报告导航](docs/reports/README.md)。代码保存在私有仓库 [tarot-divination-system](https://github.com/bowenx148-cmyk/tarot-divination-system)，中文展示名为“塔罗占卜系统”。
 
 ```text
 app/          页面、组件与API路由
@@ -21,7 +21,7 @@ docs/
 .github/      自动检查工作流
 ```
 
-根目录保留README、LICENSE、安全/来源说明和框架配置；不将密钥、运行数据、依赖或构建产物放进仓库。文件总数是递归数量，不需要把所有文件展开才能阅读。
+根目录保留README、LICENSE、安全/来源说明和框架配置；不将密钥、运行数据、依赖或构建产物放进仓库。
 
 ## 功能与贡献范围
 
