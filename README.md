@@ -17,9 +17,11 @@
 
 ## 演示视频
 
-下方为4倍速动图预览。**[观看或下载完整演示视频（MP4，约61秒）](docs/demo/tarot-demo.mp4)**，点击动图也可打开视频文件；若GitHub页面只显示下载按钮，下载后用浏览器或播放器打开。
+下方为演示封面。**[观看或下载完整演示视频（MP4，约61秒）](docs/demo/tarot-demo.mp4)**，点击封面也可打开视频文件；若GitHub页面只显示下载按钮，下载后用浏览器或播放器打开。
 
-[![塔罗占卜系统：提问、牌阵教学、报数抽牌、AI解读与历史记录](docs/demo/demo-preview.gif)](docs/demo/tarot-demo.mp4)
+[![塔罗占卜系统：提问、牌阵教学、报数抽牌、AI解读与历史记录](docs/demo/demo-cover.png)](docs/demo/tarot-demo.mp4)
+
+另有 [4倍速动图预览](docs/demo/demo-preview.gif)，便于快速浏览整个流程。
 
 演示流程：自由提问 → 牌阵教学 → 报数抽牌 → 真实DeepSeek解读 → 展开知识参考 → 历史同步。本次使用测试账号和测试问题，实际调用一次 `deepseek-flash`，没有展示API Key或真实用户咨询。视频为真实界面关键画面与翻牌片段剪辑，中文字幕、无旁白，等待与转场缩短；完整制作说明见 [演示素材说明](docs/demo/README.md)。
 
